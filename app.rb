@@ -1,3 +1,4 @@
+# Pair programming: Juan Cervantes
 require 'sinatra/base'
 require 'sinatra/flash'
 require './lib/hangperson_game.rb'
