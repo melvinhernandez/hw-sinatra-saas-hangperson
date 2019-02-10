@@ -40,6 +40,17 @@ class HangpersonApp < Sinatra::Base
   post '/guess' do
     letter = params[:guess].to_s[0]
     ### YOUR CODE HERE ###
+    begin
+      valid = @game.guess(letter)
+      game_state = @game.check_win_or_lose
+      if not valid
+        flash[:message] = "Letter already used."
+      elsif game_state != :play
+        redirect '/' + game_state.to_s
+      end
+    rescue ArgumentError
+      flash[:message] = "Invalid guess input."
+    end
     redirect '/show'
   end
   
