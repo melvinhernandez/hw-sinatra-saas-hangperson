@@ -50,7 +50,7 @@ class HangpersonApp < Sinatra::Base
         redirect '/' + game_state.to_s
       end
     rescue ArgumentError
-      flash[:message] = "Invalid guess input."
+      flash[:message] = "Argument is not valid"
     end
     redirect '/show'
   end
@@ -67,12 +67,22 @@ class HangpersonApp < Sinatra::Base
   
   get '/win' do
     ### YOUR CODE HERE ###
-    erb :win # You may change/remove this line
+    game_state = @game.check_win_or_lose
+    if game_state != :win
+      redirect '/show'
+    else
+      erb :win # You may change/remove this line
+    end
   end
   
   get '/lose' do
     ### YOUR CODE HERE ###
-    erb :lose # You may change/remove this line
+    game_state = @game.check_win_or_lose
+    if game_state != :lose
+      redirect '/show'
+    else
+      erb :lose # You may change/remove this line
+    end
   end
   
 end
