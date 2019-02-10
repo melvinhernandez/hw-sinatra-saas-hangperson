@@ -45,12 +45,12 @@ class HangpersonApp < Sinatra::Base
       valid = @game.guess(letter)
       game_state = @game.check_win_or_lose
       if not valid
-        flash[:message] = "You have already used that letter"
+        flash[:message] = "You have already used that letter."
       elsif game_state != :play
         redirect '/' + game_state.to_s
       end
     rescue ArgumentError
-      flash[:message] = "Argument is not valid"
+      flash[:message] = "Invalid guess."
     end
     redirect '/show'
   end
